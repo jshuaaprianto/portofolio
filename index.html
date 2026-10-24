@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joshua Aprianto | Electrical Engineering Technology</title>
+<meta name="description" content="Portofolio personal mahasiswa Teknologi Rekayasa Elektro Sekolah Vokasai Universitas Gadjah Mada.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 950: '#08101E', 900: '#0B172A', 800: '#10213A', 700: '#183054' },
+          crimson: { DEFAULT: '#DC0000', dark: '#A80000' },
+          speed: '#FFCC00'
+        },
+        fontFamily: {
+          display: ['"Barlow Condensed"', 'sans-serif'],
+          body: ['Inter', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { background:#08101E; font-family:'Inter',sans-serif; }
+  .font-display { letter-spacing: .01em; }
+  .slant { clip-path: polygon(0 0, 100% 0, 96% 100%, 0 100%); }
+  .slant-btn { clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+  .slant-card { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%); }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .stripes {
+    background: repeating-linear-gradient(-60deg, transparent 0 18px, rgba(220,0,0,.12) 18px 22px);
+  }
+  .glow-red { transition: box-shadow .25s ease, transform .25s ease, background .25s ease; }
+  .glow-red:hover { box-shadow: 0 0 0 1px #DC0000, 0 0 28px rgba(220,0,0,.75); transform: translateY(-2px); }
+  .card { transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+  .card:hover { transform: translateY(-6px); border-color: #FFCC00; box-shadow: 0 14px 40px -12px rgba(255,204,0,.35), 0 0 0 1px rgba(220,0,0,.5); }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.show { opacity: 1; transform: none; }
+  .nav-link { position: relative; }
+  .nav-link::after { content:''; position:absolute; left:0; bottom:-6px; height:3px; width:0; background:#DC0000; transform: skewX(-25deg); transition: width .25s ease; }
+  .nav-link:hover::after, .nav-link.active::after { width:100%; }
+  .nav-link.active { color:#FFCC00; }
+  @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(255,204,0,.7)} 70%{box-shadow:0 0 0 10px rgba(255,204,0,0)} 100%{box-shadow:0 0 0 0 rgba(255,204,0,0)} }
+  .pulse-dot { animation: pulseDot 2s infinite; }
+  .timeline-line { background: linear-gradient(to bottom, #DC0000, #FFCC00 60%, transparent); }
+  input, textarea { transition: border-color .2s, box-shadow .2s; }
+  input:focus, textarea:focus { outline:none; border-color:#FFCC00; box-shadow:0 0 0 3px rgba(255,204,0,.2); }
+  ::selection { background:#DC0000; color:#fff; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } .reveal { opacity:1; transform:none; } }
+</style>
+</head>
+<body class="text-slate-200 antialiased">
+
+<!-- ================= NAVBAR ================= -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-5 h-20 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3 group">
+      <span class="slant-btn bg-crimson text-white font-display font-extrabold italic text-2xl px-4 py-1 group-hover:bg-speed group-hover:text-navy-950 transition">#1</span>
+      <span class="font-display font-bold text-2xl uppercase tracking-wide text-white">Joshua<span class="text-speed">.</span>Aprianto</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8 font-display font-semibold uppercase tracking-widest text-lg">
+      <a href="#about" class="nav-link text-slate-300 hover:text-speed">About</a>
+      <a href="#projects" class="nav-link text-slate-300 hover:text-speed">Projects</a>
+      <a href="#skills" class="nav-link text-slate-300 hover:text-speed">Skills</a>
+      <a href="#experience" class="nav-link text-slate-300 hover:text-speed">Experience</a>
+      <a href="#contact" class="nav-link text-slate-300 hover:text-speed">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-2 border border-speed/40 bg-speed/10 px-3 py-1.5 text-sm font-medium text-speed">
+        <span class="w-2.5 h-2.5 rounded-full bg-speed pulse-dot"></span> Open for Collaboration
+      </div>
+      <button id="menuBtn" class="lg:hidden text-white p-2" aria-label="Buka menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path id="menuIcon" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden lg:hidden bg-navy-950/98 border-t border-white/10 px-5 pb-6">
+    <div class="flex flex-col font-display font-semibold uppercase tracking-widest text-xl">
+      <a href="#about" class="mobile-link py-3 border-b border-white/5 hover:text-speed">About</a>
+      <a href="#projects" class="mobile-link py-3 border-b border-white/5 hover:text-speed">Projects</a>
+      <a href="#skills" class="mobile-link py-3 border-b border-white/5 hover:text-speed">Skills</a>
+      <a href="#experience" class="mobile-link py-3 border-b border-white/5 hover:text-speed">Experience</a>
+      <a href="#contact" class="mobile-link py-3 hover:text-speed">Contact</a>
+    </div>
+    <div class="mt-4 inline-flex items-center gap-2 border border-speed/40 bg-speed/10 px-3 py-1.5 text-sm text-speed">
+      <span class="w-2.5 h-2.5 rounded-full bg-speed pulse-dot"></span> Open for Collaboration
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= HERO ================= -->
+<section id="home" class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden grid-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 -z-10"></div>
+  <div class="absolute -right-32 top-0 w-[60%] h-full stripes -skew-x-12 -z-10 opacity-70"></div>
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 font-display font-extrabold italic text-[22rem] md:text-[34rem] leading-none text-white/[0.03] select-none -z-10">1</div>
+
+  <div class="max-w-7xl mx-auto px-5 w-full">
+    <div class="reveal">
+      <span class="inline-block slant-btn bg-speed text-navy-950 font-display font-bold uppercase tracking-widest px-5 py-1 text-lg">Electrical Engineering Technology Student</span>
+      <h1 class="font-display font-extrabold italic uppercase text-white leading-[0.95] mt-6 text-6xl sm:text-7xl lg:text-8xl max-w-4xl">
+        JOSHUA APRIANTO </span>
+      </h1>
+
+
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="#projects" class="glow-red slant-btn bg-crimson text-white font-display font-bold uppercase tracking-widest text-xl px-9 py-3.5">Lihat Portofolio</a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="reveal mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+      <div class="bg-navy-800/80 border-l-4 border-speed p-5">
+        <div class="font-display font-extrabold text-5xl text-white"><span>-</span></div>
+        <div class="text-sm uppercase tracking-wider text-slate-400 mt-1">GPA / 4.00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="relative py-24 bg-navy-900">
+  <div class="max-w-7xl mx-auto px-5 grid lg:grid-cols-5 gap-12 items-center">
+    <div class="lg:col-span-2 reveal">
+      <div class="relative max-w-sm mx-auto">
+        <div class="absolute -inset-3 bg-crimson slant-card translate-x-3 translate-y-3"></div>
+        <div class="relative slant-card bg-navy-800 aspect-[4/5] flex items-center justify-center border border-white/10 overflow-hidden">
+          <img src="foto.jpeg" class="w-full h-full object-cover" alt="Foto Joshua">
+            <span class="font-display font-extrabold italic text-[10rem] text-white/10 absolute">JA</span>
+          <svg class="w-28 h-28 text-speed relative" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        </div>
+        <div class="absolute -bottom-5 -right-3 slant-btn bg-speed text-navy-950 font-display font-extrabold italic text-4xl px-6 py-2">#1</div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3 reveal">
+      <p class="font-display font-bold uppercase tracking-[0.3em] text-crimson text-lg">// About Me</p>
+      <h2 class="font-display font-extrabold italic uppercase text-5xl md:text-6xl text-white mt-2">Driven by <span class="text-speed">Excellence</span></h2>
+      <div class="mt-6 space-y-4 text-slate-300 leading-relaxed text-lg">
+        <p>Mahasiswa tahun pertama program studi Teknologi Rekayasa Elektro di Universitas Gadjah Mada yang memiliki minat besar di bidang teknik, elektronika, robotika, sistem penggerak (powertrain), dan sistem kendali. Memiliki pengalaman berorganisasi melalui OSIS dan Paskibra yang telah membentuk kemampuan kerja sama tim yang kuat, rasa tanggung jawab, serta kedisiplinan. Selain itu, memiliki pengalaman dalam merancang dan memprogram tempat sampah pemilah otomatis berbasis Arduino Uno. Memiliki motivasi tinggi untuk memperluas dan memperdalam keahlian teknis melalui proyek praktis, belajar dari para profesional berpengalaman, serta berkontribusi langsung dalam pemecahan masalah.</p>
+      </div>
+      <div class="mt-8 grid sm:grid-cols-3 gap-4">
+        <div class="border border-white/10 bg-navy-950/60 p-4"><div class="text-speed font-display font-bold text-xl uppercase">Disiplin</div><p class="text-sm text-slate-400 mt-1">Jadwal kerja terukur dan tepat waktu.</p></div>
+        <div class="border border-white/10 bg-navy-950/60 p-4"><div class="text-speed font-display font-bold text-xl uppercase">Presisi</div><p class="text-sm text-slate-400 mt-1">Detail desain diuji sebelum dirilis.</p></div>
+        <div class="border border-white/10 bg-navy-950/60 p-4"><div class="text-speed font-display font-bold text-xl uppercase">Kolaborasi</div><p class="text-sm text-slate-400 mt-1">Nyaman bekerja dalam tim lintas bidang.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- Riwayat Pendidikan -->
+      <div class="mt-12">
+        <h3 class="font-display font-extrabold italic uppercase text-3xl text-white flex items-center gap-3">
+          <span class="slant-btn bg-crimson text-white px-3 py-0.5 text-xl">EDU</span> Riwayat <span class="text-speed">Pendidikan</span>
+        </h3>
+
+        <ol class="relative mt-6 border-l-4 border-crimson ml-2 space-y-6">
+          <li class="card bg-navy-800 border border-white/10 p-5 ml-6 relative">
+            <span class="absolute -left-[34px] top-6 w-4 h-4 bg-speed rotate-45 border-2 border-navy-950"></span>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h4 class="font-display font-bold uppercase text-2xl text-white">D4 Teknologi Rekayasa Elektro</h4>
+              <span class="slant-btn bg-speed text-navy-950 font-display font-bold px-4 py-0.5">2026 – Sekarang</span>
+            </div>
+            <p class="text-speed font-medium mt-1">Universitas Gadjah Mada, Yogyakarta</p>
+            <p class="text-slate-400 text-[15px] mt-2">IPK TBA / 4.00. </p>
+          </li>
+
+          <li class="card bg-navy-800 border border-white/10 p-5 ml-6 relative">
+            <span class="absolute -left-[34px] top-6 w-4 h-4 bg-crimson rotate-45 border-2 border-navy-950"></span>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h4 class="font-display font-bold uppercase text-2xl text-white">SMA Negeri 33 Jakarta</h4>
+              <span class="slant-btn bg-speed text-navy-950 font-display font-bold px-4 py-0.5">2023 – 2026</span>
+            </div>
+            <p class="text-speed font-medium mt-1">Jurusan IPA</p>
+            <p class="text-slate-400 text-[15px] mt-2">Aktif di ekstrakurikuler Paskibra dan OSIS.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="py-24 bg-navy-900">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="reveal">
+      <p class="font-display font-bold uppercase tracking-[0.3em] text-crimson text-lg">// Featured Project</p>
+      <h2 class="font-display font-extrabold italic uppercase text-5xl md:text-6xl text-white mt-2">Karya <span class="text-speed">Unggulan</span></h2>
+    </div>
+
+    <div class="mt-12 max-w-5xl mx-auto">
+      <article class="card reveal bg-navy-800 border border-white/10 overflow-hidden grid md:grid-cols-2">
+
+        <!-- Ilustrasi -->
+        <div class="relative min-h-[260px] bg-navy-950 overflow-hidden">
+          <svg viewBox="0 0 400 280" class="w-full h-full absolute inset-0" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="280" fill="#0B172A"/>
+            <!-- panah masuk -->
+            <path d="M200 8v30" stroke="#DC0000" stroke-width="4" stroke-linecap="round"/>
+            <path d="M190 28l10 12 10-12" fill="none" stroke="#DC0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- soil moisture sensor (dua bilah) -->
+            <rect x="188" y="46" width="8" height="30" fill="#FFCC00"/>
+            <rect x="204" y="46" width="8" height="30" fill="#FFCC00"/>
+            <!-- penyekat servo -->
+            <path d="M200 90L160 120" stroke="#DC0000" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="200" cy="90" r="8" fill="#183054" stroke="#FFCC00" stroke-width="2"/>
+            <!-- dua kompartemen -->
+            <path d="M110 120h85v125H115z" fill="#10213A" stroke="#FFCC00" stroke-width="2"/>
+            <path d="M205 120h85l-5 125h-80z" fill="#10213A" stroke="#FFCC00" stroke-width="2"/>
+            <g font-family="sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFCC00">
+              <text x="152" y="188">BASAH</text>
+              <text x="247" y="188">KERING</text>
+            </g>
+            <!-- garis kecepatan -->
+            <g stroke="#FFCC00" stroke-opacity=".35" stroke-width="2"><path d="M20 200h60M10 220h70M30 240h50"/></g>
+          </svg>
+          <span class="absolute top-3 left-3 slant-btn bg-crimson text-white font-display font-extrabold italic px-3">P1</span>
+        </div>
+
+        <!-- Konten -->
+        <div class="p-7 md:p-8 flex flex-col">
+          <h3 class="font-display font-bold uppercase text-3xl text-white">Automatic Waste Sorter</h3>
+          <p class="text-slate-400 mt-1 font-display uppercase tracking-wider text-sm">Tong Sampah Pemilah Otomatis</p>
+
+          <p class="text-slate-300 mt-4 text-[15px] leading-relaxed">
+            Tong sampah pintar yang memilah sampah basah dan kering secara otomatis. Soil moisture sensor membaca kadar air pada sampah, Arduino Uno memproses datanya, lalu servo menggerakkan penyekat ke kompartemen yang sesuai tanpa sentuhan tangan.
+          </p>
+
+          <ul class="mt-4 space-y-2 text-[15px] text-slate-300">
+            <li class="flex gap-2"><span class="text-speed">▸</span> Deteksi sampah basah/kering dari kadar kelembapan</li>
+            <li class="flex gap-2"><span class="text-speed">▸</span> Servo mengarahkan sampah ke kompartemen yang tepat</li>
+            <li class="flex gap-2"><span class="text-speed">▸</span> Logika berbasis ambang batas yang bisa dikalibrasi</li>
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mt-5 text-xs font-semibold">
+            <span class="px-2 py-1 bg-speed/15 text-speed border border-speed/40">Arduino Uno</span>
+            <span class="px-2 py-1 bg-speed/15 text-speed border border-speed/40">Soil Moisture Sensor</span>
+            <span class="px-2 py-1 bg-speed/15 text-speed border border-speed/40">Servo Motor</span>
+            <span class="px-2 py-1 bg-speed/15 text-speed border border-speed/40">C++</span>
+          </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience" class="py-24 bg-navy-950 grid-bg">
+  <div class="max-w-5xl mx-auto px-5">
+    <div class="reveal text-center">
+      <p class="font-display font-bold uppercase tracking-[0.3em] text-crimson text-lg">// Experience &amp; Milestones</p>
+      <h2 class="font-display font-extrabold italic uppercase text-5xl md:text-6xl text-white mt-2">Track <span class="text-speed">Record</span></h2>
+    </div>
+
+    <div class="relative mt-16">
+      <div class="timeline-line absolute left-4 md:left-1/2 top-0 bottom-0 w-1 md:-translate-x-1/2"></div>
+
+      <!-- item -->
+      <div class="reveal relative mb-12 md:grid md:grid-cols-2 md:gap-14">
+        <span class="absolute left-4 md:left-1/2 -translate-x-1/2 top-2 w-5 h-5 bg-crimson border-4 border-navy-950 rotate-45 z-10"></span>
+        <div class="pl-12 md:pl-0 md:text-right">
+          <span class="font-display font-bold text-speed text-xl">2026 – Sekarang</span>
+          <h3 class="font-display font-bold uppercase text-2xl text-white mt-1">To Be Continued</h3>
+          <p class="text-slate-400 mt-1"></p>
+          <p class="text-slate-300 mt-2 text-[15px]"></p>
+        </div>
+        <div></div>
+      </div>
+
+
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="py-24 bg-navy-900 relative overflow-hidden">
+  <div class="absolute -left-40 bottom-0 w-[50%] h-2/3 stripes skew-x-12 opacity-60"></div>
+  <div class="max-w-6xl mx-auto px-5 relative grid lg:grid-cols-2 gap-12">
+    <div class="reveal">
+      <p class="font-display font-bold uppercase tracking-[0.3em] text-crimson text-lg">// Contact</p>
+      <h2 class="font-display font-extrabold italic uppercase text-5xl md:text-6xl text-white mt-2">Let's Build <span class="text-speed">Together</span></h2>
+      <p class="mt-5 text-slate-300 text-lg leading-relaxed max-w-md">Punya proyek, peluang magang, atau ide kolaborasi? Kirim pesan dan saya akan membalas secepatnya.</p>
+      <div class="mt-8 space-y-3">
+        <a href="https://github.com/username" target="_blank" rel="noopener" class="glow-red flex items-center gap-4 bg-navy-800 border border-white/10 p-4 max-w-sm hover:border-crimson">
+          <span class="w-10 h-10 bg-crimson flex items-center justify-center font-display font-extrabold text-white text-lg">GH</span>
+          <span class="font-semibold">github.com/username</span>
+        </a>
+        <a href="https://linkedin.com/in/username" target="_blank" rel="noopener" class="glow-red flex items-center gap-4 bg-navy-800 border border-white/10 p-4 max-w-sm hover:border-crimson">
+          <span class="w-10 h-10 bg-speed flex items-center justify-center font-display font-extrabold text-navy-950 text-xl">in</span>
+          <span class="font-semibold">https://www.linkedin.com/in/joshua-aprianto</span>
+        </a>
+        <a href="mailto:joshuaaprianto@mail.ugm.ac.id" class="glow-red flex items-center gap-4 bg-navy-800 border border-white/10 p-4 max-w-sm hover:border-crimson">
+          <span class="w-10 h-10 bg-crimson flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <span class="font-semibold">joshuaaprianto@mail.ugm.ac.id</span>
+        </a>
+      </div>
+    </div>
+
+    <form id="contactForm" class="reveal slant-card bg-navy-800 border border-white/10 p-7 md:p-9" novalidate>
+      <div class="mb-5">
+        <label for="name" class="block font-display font-bold uppercase tracking-wider text-lg mb-1">Nama</label>
+        <input id="name" name="name" type="text" required placeholder="Nama lengkap" class="w-full bg-navy-950 border border-white/15 px-4 py-3 text-white placeholder-slate-500">
+        <p class="err text-sm text-red-400 mt-1 hidden">Nama wajib diisi.</p>
+      </div>
+      <div class="mb-5">
+        <label for="email" class="block font-display font-bold uppercase tracking-wider text-lg mb-1">Email</label>
+        <input id="email" name="email" type="email" required placeholder="email@contoh.com" class="w-full bg-navy-950 border border-white/15 px-4 py-3 text-white placeholder-slate-500">
+        <p class="err text-sm text-red-400 mt-1 hidden">Masukkan email yang valid.</p>
+      </div>
+      <div class="mb-6">
+        <label for="message" class="block font-display font-bold uppercase tracking-wider text-lg mb-1">Pesan</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Tulis pesan Anda..." class="w-full bg-navy-950 border border-white/15 px-4 py-3 text-white placeholder-slate-500 resize-none"></textarea>
+        <p class="err text-sm text-red-400 mt-1 hidden">Pesan minimal 10 karakter.</p>
+      </div>
+      <button type="submit" class="glow-red slant-btn w-full bg-crimson text-white font-display font-bold uppercase tracking-widest text-xl py-3.5">Kirim Pesan</button>
+      <p id="formStatus" class="mt-4 text-center text-speed font-medium hidden"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-navy-950 border-t-4 border-crimson">
+  <div class="max-w-7xl mx-auto px-5 py-10 flex flex-col md:flex-row items-center justify-between gap-5">
+    <div class="flex items-center gap-3">
+      <span class="slant-btn bg-crimson text-white font-display font-extrabold italic text-xl px-3">#1</span>
+      <span class="font-display font-bold uppercase tracking-wide text-xl">Joshua<span class="text-speed">.</span>Aprianto</span>
+    </div>
+    <p class="text-slate-400 text-sm text-center">© <span id="year"></span> Joshua Aprianto. Dibangun dengan presisi dan semangat juara.</p>
+    <a href="#home" class="font-display font-bold uppercase tracking-widest text-speed hover:text-white transition">Kembali ke atas ↑</a>
+  </div>
+  <div class="h-1.5 bg-gradient-to-r from-crimson via-speed to-crimson"></div>
+</footer>
+
+<script>
+  // Tahun footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Navbar: efek saat scroll
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => {
+    const scrolled = window.scrollY > 20;
+    navbar.classList.toggle('bg-navy-950/90', scrolled);
+    navbar.classList.toggle('backdrop-blur-md', scrolled);
+    navbar.classList.toggle('border-white/10', scrolled);
+    navbar.classList.toggle('border-transparent', !scrolled);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Menu mobile
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = document.getElementById('menuIcon');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    menuIcon.setAttribute('d', open ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16');
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuIcon.setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
+  }));
+
+  // Reveal on scroll + counter + progress bar
+  const animateCounter = (el) => {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimal || '0', 10);
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.classList.add('show');
+      el.querySelectorAll('.counter').forEach(animateCounter);
+      el.querySelectorAll('.bar').forEach(b => {
+        b.style.transition = 'width 1.2s ease';
+        b.style.width = b.dataset.w + '%';
+      });
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Link aktif di navbar
+  const sections = document.querySelectorAll('main section[id]');
+  const links = document.querySelectorAll('.nav-link');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => spy.observe(s));
+
+  // Filter proyek
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projects = document.querySelectorAll('.project');
+  filterBtns.forEach(btn => btn.addEventListener('click', () => {
+    filterBtns.forEach(b => {
+      b.classList.remove('active', 'bg-crimson', 'text-white');
+      b.classList.add('bg-navy-700', 'text-slate-300');
+    });
+    btn.classList.add('active', 'bg-crimson', 'text-white');
+    btn.classList.remove('bg-navy-700', 'text-slate-300');
+    const f = btn.dataset.f;
+    projects.forEach(p => {
+      p.style.display = (f === 'all' || p.dataset.cat === f) ? '' : 'none';
+    });
+  }));
+
+  // Tombol Unduh CV (ganti href dengan file CV Anda, misalnya "cv-raka.pdf")
+  document.getElementById('cvBtn').addEventListener('click', (e) => {
+    const cvPath = ''; // contoh: 'cv-raka.pdf'
+    if (!cvPath) { e.preventDefault(); alert('Tambahkan file CV Anda pada variabel cvPath di bagian script.'); }
+    else { e.currentTarget.href = cvPath; e.currentTarget.setAttribute('download', ''); }
+  });
+
+  // Validasi form kontak (membuka aplikasi email sebagai pengiriman sederhana)
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    const errs = form.querySelectorAll('.err');
+    const checks = [name.length > 0, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), message.length >= 10];
+    let ok = true;
+    checks.forEach((valid, i) => { errs[i].classList.toggle('hidden', valid); if (!valid) ok = false; });
+    if (!ok) return;
+    const subject = encodeURIComponent('Pesan dari portofolio: ' + name);
+    const body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:raka.aditya@mail.ugm.ac.id?subject=' + subject + '&body=' + body;
+    status.textContent = 'Terima kasih! Aplikasi email Anda akan terbuka.';
+    status.classList.remove('hidden');
+    form.reset();
+  });
+</script>
+</body>
+</html>
